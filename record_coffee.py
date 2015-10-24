@@ -23,9 +23,9 @@ def record_coffee(initial_run=False):
 
 
 def upload():
-    subprocess.call('git -C ~/code/coffee add coffeelog.csv', shell=True)
-    subprocess.call('git -C ~/code/coffee commit -m "Drank Cofee"', shell=True)
-    subprocess.call('git -C ~/code/coffee  push', shell=True)
+    subprocess.call('git add coffeelog.csv', shell=True)
+    subprocess.call('git commit -m "Drank Cofee"', shell=True)
+    subprocess.call('git push', shell=True)
 
 if __name__ == '__main__':
     main()
