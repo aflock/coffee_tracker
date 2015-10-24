@@ -11,6 +11,7 @@ DEFAULT_FMT = 'coffee'
 def main():
     initial_run = FILENAME not in os.listdir('.')
     record_coffee(initial_run)
+    upload()
 
 
 def record_coffee(initial_run=False):
@@ -22,10 +23,9 @@ def record_coffee(initial_run=False):
 
 
 def upload():
-    subprocess.call('git -C ~/coffee_tracker add coffeelog.csv')
-    subprocess.call('git -C ~/coffee_tracker commit -m "Drank Cofee"')
-    subprocess.call('git -C ~/coffee_tracker  push')
-    return
+    subprocess.call('git -C ~/code/coffee add coffeelog.csv', shell=True)
+    subprocess.call('git -C ~/code/coffee commit -m "Drank Cofee"', shell=True)
+    subprocess.call('git -C ~/code/coffee  push', shell=True)
 
 if __name__ == '__main__':
     main()
