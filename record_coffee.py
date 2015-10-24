@@ -1,4 +1,5 @@
 import csv
+import subprocess
 import os
 import time
 # Constants
@@ -19,7 +20,11 @@ def record_coffee(initial_run=False):
             writer.writeheader()
         writer.writerow({'mg': DEFAULT_MG, 'format': DEFAULT_FMT, 'date': time.time()})
 
+
 def upload():
+    subprocess.call('git -C ~/coffee_tracker add coffeelog.csv')
+    subprocess.call('git -C ~/coffee_tracker commit -m "Drank Cofee"')
+    subprocess.call('git -C ~/coffee_tracker  push')
     return
 
 if __name__ == '__main__':
