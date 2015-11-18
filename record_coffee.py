@@ -16,16 +16,18 @@ def main():
 
 
 def record_coffee(initial_run=False):
-    with open(FILENAME, 'a') as f:
-        writer = csv.DictWriter(f, fieldnames = FIELDS)
-        if initial_run:
-            writer.writeheader()
-        writer.writerow({'mg': DEFAULT_MG, 'format': "coffee", 'date': time.time()})
+    # with open(FILENAME, 'a') as f:
+        # writer = csv.DictWriter(f, fieldnames = FIELDS)
+        # if initial_run:
+            # writer.writeheader()
+        # writer.writerow({'mg': DEFAULT_MG, 'format': "coffee", 'date': time.time()})
     with open('coffeelog.json', 'r') as json_data:
         data = json.load(json_data)
     with open('coffeelog.json', 'w+') as json_data:
         data['data'].append({"mg":DEFAULT_MG, "date":time.time(), "format":"coffee"})
         json.dump(data, json_data)
+
+
 
 
 
