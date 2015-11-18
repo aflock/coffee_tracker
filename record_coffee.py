@@ -2,6 +2,7 @@ import csv
 import subprocess
 import os
 import time
+import json
 # Constants
 FILENAME = "coffeelog.csv"
 FIELDS = ['mg', 'date', 'format']
@@ -19,11 +20,17 @@ def record_coffee(initial_run=False):
         writer = csv.DictWriter(f, fieldnames = FIELDS)
         if initial_run:
             writer.writeheader()
-        writer.writerow({'mg': DEFAULT_MG, 'format': DEFAULT_FMT, 'date': time.time()})
+        writer.writerow({'mg': DEFAULT_MG, 'format': "coffee", 'date': time.time()})
+    with open('coffeelog.json', 'r') as json_data:
+        data = json.load(json_data)
+    with open('coffeelog.json', 'w+') as json_data:
+        data['data'].append({"mg":DEFAULT_MG, "date":time.time(), "format":"coffee"})
+        json.dump(data, json_data)
+
 
 
 def upload():
-    subprocess.call('git add coffeelog.csv', shell=True)
+    subprocess.call('git add coffeelog.json', shell=True)
     subprocess.call('git commit -m "Drank Cofee"', shell=True)
     subprocess.call('git push', shell=True)
 
