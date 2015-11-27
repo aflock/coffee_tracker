@@ -1,35 +1,49 @@
+"""Record Coffee
+
+Usage:
+    record_coffee.py [--format=<fmt>] [--mg=<mg>]
+
+Options:
+  --format=<fmt> What beverage [default: 'coffee'].
+  --mg=<mg>      How many milligrams of caffeine [default: 80]
+
+"""
+
 import csv
 import subprocess
+import IPython
 import os
 import time
 import json
+from docopt import docopt
+
 # Constants
 FILENAME = "coffeelog.csv"
 FIELDS = ['mg', 'date', 'format']
 DEFAULT_MG = 80
 DEFAULT_FMT = 'coffee'
 
-def main():
-    initial_run = FILENAME not in os.listdir('.')
-    record_coffee(initial_run)
+def main(arguments):
+    if '--format' in arguments and arguments['--format']:
+        fmt = arguments['--format']
+    else:
+        fmt = DEFAULT_FMT
+
+    if '--mg' in arguments and arguments['--mg']:
+        mg = arguments['--mg']
+    else:
+        mg = DEFAULT_MG
+
+    record_coffee(fmt, mg)
     upload()
 
-
-def record_coffee(initial_run=False):
-    # with open(FILENAME, 'a') as f:
-        # writer = csv.DictWriter(f, fieldnames = FIELDS)
-        # if initial_run:
-            # writer.writeheader()
-        # writer.writerow({'mg': DEFAULT_MG, 'format': "coffee", 'date': time.time()})
+def record_coffee(fmt, mg):
+    print("record ", fmt, mg)
     with open('coffeelog.json', 'r') as json_data:
         data = json.load(json_data)
     with open('coffeelog.json', 'w+') as json_data:
-        data['data'].append({"mg":DEFAULT_MG, "date":time.time(), "format":"coffee"})
+        data['data'].append({"mg":int(mg), "date":time.time(), "format":fmt})
         json.dump(data, json_data)
-
-
-
-
 
 def upload():
     subprocess.call('git add coffeelog.json', shell=True)
@@ -38,4 +52,5 @@ def upload():
     subprocess.call('git push', shell=True)
 
 if __name__ == '__main__':
-    main()
+    arguments = docopt(__doc__)
+    main(arguments)
