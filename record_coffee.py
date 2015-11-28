@@ -35,7 +35,7 @@ def main(arguments):
         mg = DEFAULT_MG
 
     record_coffee(fmt, mg)
-    upload()
+    # upload()
 
 def record_coffee(fmt, mg):
     print("record ", fmt, mg)
