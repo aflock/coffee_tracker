@@ -15,5 +15,13 @@ else
   python ~/coffee_tracker/record_coffee.py
 fi
 vim -u NONE -s ~/coffee_tracker/format.vim coffeelog.json
-python ~/coffee_tracker/upload_coffee.py
+git add coffeelog.json
+git add coffeelog.js
+if [ -n "$1" ]
+then
+    git commit -m "Drank $1"
+else
+    git commit -m "Drank Coffee"
+fi
+git push
 popd
