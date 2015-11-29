@@ -20,7 +20,7 @@ from docopt import docopt
 # Constants
 FILENAME = "coffeelog.csv"
 FIELDS = ['mg', 'date', 'format']
-DEFAULT_MG = 80
+DEFAULT_MG = 100
 DEFAULT_FMT = 'coffee'
 
 def main(arguments):
@@ -35,7 +35,6 @@ def main(arguments):
         mg = DEFAULT_MG
 
     record_coffee(fmt, mg)
-    upload()
 
 def record_coffee(fmt, mg):
     print("record ", fmt, mg)
@@ -45,12 +44,8 @@ def record_coffee(fmt, mg):
         data['data'].append({"mg":int(mg), "date":time.time(), "format":fmt})
         json.dump(data, json_data)
 
-def upload():
-    subprocess.call('git add coffeelog.json', shell=True)
-    subprocess.call('git add coffeelog.js', shell=True)
-    subprocess.call('git commit -m "Drank Cofee"', shell=True)
-    subprocess.call('git push', shell=True)
 
 if __name__ == '__main__':
+    # IPython.embed()
     arguments = docopt(__doc__)
     main(arguments)
