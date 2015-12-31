@@ -1,5 +1,5 @@
 window.onload = function () {
-    console.log("start")
+    //console.log("start")
     var width = 960,
         height = 500;
 
@@ -28,7 +28,7 @@ window.onload = function () {
         .attr("x", barWidth / 2)
         .attr("dy", ".75em")
 
-        console.log(getCurrentBloodMg(data.data))
+        //console.log(getCurrentBloodMg(data.data))
 }
 
 // Get current mg of caffeine in the blood
@@ -41,7 +41,7 @@ var getRemainingMg = function(mg, startTime) {
   timeElapsed = nowSeconds - startTime;
   sixHours = 6 * 60 * 60;
   remainingMg = mg * Math.pow(2, (-1 * timeElapsed/sixHours));
-  console.log("Caffeing remaining from " + mg  +"mg after " + timeElapsed  +"s :", remainingMg)
+  //console.log("Caffeing remaining from " + mg  +"mg after " + timeElapsed  +"s :", remainingMg)
   return remainingMg;
 }
 
