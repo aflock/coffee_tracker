@@ -17,3 +17,4 @@ fi
 vim -u NONE -s ~/coffee_tracker/format.vim coffeelog.json
 python ~/coffee_tracker/upload_coffee.py
 popd
+imgcat ~/coffee_tracker/coffee_cat.gif
