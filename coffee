@@ -15,6 +15,7 @@ else
   python ~/coffee_tracker/record_coffee.py
 fi
 vim -u NONE -s ~/coffee_tracker/format.vim coffeelog.json
+js-beautify coffeelog.js > coffeelog_formatted.js
 python ~/coffee_tracker/upload_coffee.py
 popd
 files=(~/coffee_tracker/gifs/*.gif)
